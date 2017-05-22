@@ -61,6 +61,10 @@ class ViewController: UIViewController {
                 user.username = usernameTextField.text
                 user.password = passwordTextField.text
             
+                let acl = PFACL()
+                acl.getPublicWriteAccess = true
+                
+                user.acl = acl
                 
                 user.signUpInBackground(block: {(success,error) in
                     
@@ -79,7 +83,11 @@ class ViewController: UIViewController {
                     
                     else{
                         
-                        print("User signed up")
+                       self.SituationLabel.textColor = UIColor.red
+                       self.SituationLabel.backgroundColor = UIColor.blue
+                       self.SituationLabel.text = "Perfect signing up"
+                        
+                       self.performSegue(withIdentifier: "goToprofile", sender: self)
                     }
                     
                     
@@ -107,7 +115,11 @@ class ViewController: UIViewController {
                     }
                     else{
                         
-                        print("User logged in")
+                        self.SituationLabel.textColor = UIColor.red
+                        self.SituationLabel.backgroundColor = UIColor.green
+                        self.SituationLabel.text = "Perfect Login"
+                        
+                        self.performSegue(withIdentifier: "goToProfile", sender: self)
                     }
                     
                     
@@ -126,7 +138,9 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var changeSignupModeButton: UIButton!
     
+    @IBOutlet weak var SituationLabel: UILabel!
     @IBOutlet weak var messageLabel: UILabel!
+    
     @IBAction func changeSignupMode(_ sender: Any) {
         
         if sigupMode{
@@ -147,37 +161,21 @@ class ViewController: UIViewController {
         }
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        
+        /*if PFUser.current() != nil{
+            
+            performSegue(withIdentifier: "goToProfile", sender: self)
+        }*/
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        let testObject = PFObject(className: "TestObject2")
+        passwordTextField.isSecureTextEntry = true
         
-        testObject["foo"] = "bar"
         
-        testObject.saveInBackground { (success, error) -> Void in
-            
-            // added test for success 11th July 2016
-            
-            if success {
-                
-                print("Object has been saved.")
-                
-            } else {
-                
-                if error != nil {
-                    
-                    print (error as Any)
-                    
-                } else {
-                    
-                    print ("Error")
-                }
-                
-            }
-            
-        }
         
     }
 
