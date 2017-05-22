@@ -29,9 +29,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Parse.enableLocalDatastore()
         
         let parseConfiguration = ParseClientConfiguration(block: { (ParseMutableClientConfiguration) -> Void in
-            ParseMutableClientConfiguration.applicationId = "myappid"
-            ParseMutableClientConfiguration.clientKey = "mymasterkey"
-            ParseMutableClientConfiguration.server = "ec2-54-187-123-121.us-west-2.compute.amazonaws.com/parse"
+            ParseMutableClientConfiguration.applicationId = "99d68ffe96635748778bbedd050090bd8590cce0"
+            ParseMutableClientConfiguration.clientKey = "7e4498ffa11bf227e01b37f91cef7437f5d05ec0"
+            ParseMutableClientConfiguration.server = "http://ec2-54-187-123-121.us-west-2.compute.amazonaws.com/parse"
         })
         
         Parse.initialize(with: parseConfiguration)
@@ -47,7 +47,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // PFFacebookUtils.initializeFacebook()
         // ****************************************************************************
 
-        PFUser.enableAutomaticUser()
+        //PFUser.enableAutomaticUser()
 
         let defaultACL = PFACL();
 
