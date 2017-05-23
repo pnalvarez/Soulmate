@@ -98,6 +98,47 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
                 
             })
         }
+        
+        let urlArray = ["https://img.clipartfest.com/6c6b4b848eedb01bf2600d66891cff73_funny-female-cartoon-character-names-kids-pinterest-sunshine-female-cartoon-characters-names_320-240.jpeg","http://www.thezerosbeforetheone.com/wordpress/wp-content/uploads/2011/07/smurfette-300x225.gif","https://s-media-cache-ak0.pinimg.com/236x/39/17/33/3917338162bb9eb2b63a23545e09f409.jpg","http://img3.wikia.nocookie.net/__cb20090216134906/fantendo/images/a/ab/Toon_Zelda.jpg","http://vignette1.wikia.nocookie.net/zelda/images/3/35/Toon_Zelda_%28Hyrule_Warriors%29.png/revision/latest?cb=20160902021811","http://main-im-char-1.gamewise.co/Hilda-Zelda-231446-full.png","https://s-media-cache-ak0.pinimg.com/736x/24/b6/1d/24b61d8d873bb34abe3cd6d8358313d5.jpg"]
+        
+        var counter = 0
+        
+        for urlString in urlArray{
+            
+            counter+=1
+            
+            let url = URL(string: urlString)!
+            
+            do{
+                
+            let data = try Data(contentsOf: url)
+            let imageFile = PFFile(name: "photo.png",data: data)
+            let user = PFUser()
+            user["photo"] = imageFile
+            user.username = "Girl \(counter)"
+            user.password = "password"
+            user["interesteInFemale"] = false
+            user["isFemale"] = true
+                
+                let acl = PFACL()
+                acl.getPublicWriteAccess = true
+                
+                user.acl = acl
+                
+                user.signUpInBackground(block: { (success,error) in
+                    
+                    if success{
+                        
+                        print("New User 4U")
+                    }
+                    
+                    
+                })
+            }
+            catch{
+                print("could not get data")
+            }
+        }
         // Do any additional setup after loading the view.
     }
 
