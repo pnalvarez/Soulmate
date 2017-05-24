@@ -63,6 +63,7 @@ class ViewController: UIViewController {
             
                 let acl = PFACL()
                 acl.getPublicWriteAccess = true
+                acl.getPublicReadAccess = true
                 
                 user.acl = acl
                 
@@ -119,7 +120,8 @@ class ViewController: UIViewController {
                         self.SituationLabel.backgroundColor = UIColor.green
                         self.SituationLabel.text = "Perfect Login"
                         
-                        self.performSegue(withIdentifier: "goToProfile", sender: self)
+                        self.redirectUser()
+                        //self.performSegue(withIdentifier: "goToProfile", sender: self)
                     }
                     
                     
@@ -163,12 +165,21 @@ class ViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         
-        /*if PFUser.current() != nil{
-            
-            performSegue(withIdentifier: "goToProfile", sender: self)
-        }*/
+       //redirectUser()
     }
 
+    func redirectUser(){
+        
+        if PFUser.current() != nil{
+            
+            if PFUser.current()?["isFemale"] != nil && PFUser.current()?["interestedInFemales"] != nil && PFUser.current()?["photo"] != nil {
+                
+                performSegue(withIdentifier: "ShowFindSouls", sender: self)
+            }else{
+                performSegue(withIdentifier: "goToProfile", sender: self)
+            }
+        }
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.

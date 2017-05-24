@@ -94,11 +94,12 @@
                         <outlet property="signupOrLoginButton" destination="yAT-Sp-iNX" id="RUj-Nj-bzs"/>
                         <outlet property="usernameTextField" destination="Kcx-f1-AXm" id="nQT-Y7-3Lu"/>
                         <segue destination="WRo-DU-Wsu" kind="show" identifier="goToProfile" id="GPr-hu-LOs"/>
+                        <segue destination="v2s-u8-cpE" kind="show" identifier="ShowFindSouls" id="te5-eA-kox"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="136.80000000000001" y="108.39580209895054"/>
+            <point key="canvasLocation" x="-114" y="26"/>
         </scene>
         <!--Profile View Controller-->
         <scene sceneID="DKf-zk-4H7">
@@ -170,8 +171,8 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Woman" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ztf-1j-6sQ">
-                                <rect key="frame" x="292" y="444" width="58" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Women" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ztf-1j-6sQ">
+                                <rect key="frame" x="292" y="444" width="67" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
@@ -204,14 +205,74 @@
                         <outlet property="SituationLabel" destination="jee-Z3-b5M" id="E7G-FU-KZl"/>
                         <outlet property="genderSwitch" destination="BJE-HT-Paw" id="klL-Zt-mCB"/>
                         <outlet property="interestedInSwitch" destination="g4K-Ua-a3s" id="ho5-ht-GOl"/>
+                        <segue destination="v2s-u8-cpE" kind="show" identifier="ShowFindSoul" id="fY7-82-bUI"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IcY-xK-yA7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="832.79999999999995" y="107.49625187406298"/>
+            <point key="canvasLocation" x="1069.5999999999999" y="25.637181409295355"/>
+        </scene>
+        <!--Find Soul-->
+        <scene sceneID="iJ2-P4-dKM">
+            <objects>
+                <viewController id="v2s-u8-cpE" customClass="FindSoul" customModule="ParseStarterProject_Swift" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="pbz-Nx-4Fk"/>
+                        <viewControllerLayoutGuide type="bottom" id="C9h-85-7ed"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="eFz-kE-ocD">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Nud-MD-ROl">
+                                <rect key="frame" x="0.0" y="38" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <items>
+                                    <navigationItem title="Find your  partner" id="KOm-NN-NqB">
+                                        <barButtonItem key="leftBarButtonItem" title="Log out" id="dUu-1z-PgB">
+                                            <connections>
+                                                <action selector="LogOut:" destination="v2s-u8-cpE" id="3Ng-iw-03W"/>
+                                            </connections>
+                                        </barButtonItem>
+                                        <barButtonItem key="rightBarButtonItem" title="Profile" id="d73-42-fQz">
+                                            <connections>
+                                                <action selector="editProfile:" destination="v2s-u8-cpE" id="r95-rK-FNz"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="05-512.png" translatesAutoresizingMaskIntoConstraints="NO" id="Kif-1K-mLb">
+                                <rect key="frame" x="59" y="105" width="256" height="309"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Swipe left to pass or right to accept" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PXK-Yl-3h5">
+                                <rect key="frame" x="16" y="527" width="343" height="47"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <color key="textColor" red="0.20840403538022656" green="0.0" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="0.76824590479109212" blue="0.94513882840111396" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </view>
+                    <connections>
+                        <outlet property="SoulmateImage" destination="Kif-1K-mLb" id="pob-py-bA8"/>
+                        <segue destination="BYZ-38-t0r" kind="show" identifier="LogOutSegue" id="liB-m1-fJV"/>
+                        <segue destination="WRo-DU-Wsu" kind="show" identifier="goToProfile" id="Ahx-fD-q7b"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="LPr-p7-21b" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="580" y="760.56971514242889"/>
         </scene>
     </scenes>
     <resources>
+        <image name="05-512.png" width="512" height="512"/>
         <image name="heart.jpg" width="1600" height="900"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="Ahx-fD-q7b"/>
+        <segue reference="fY7-82-bUI"/>
+    </inferredMetricsTieBreakers>
 </document>

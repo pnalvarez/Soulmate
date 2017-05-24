@@ -64,6 +64,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
             }
             else{
                 print("Updated")
+                self.performSegue(withIdentifier: "ShowFindSoul", sender: self)
             }
         })
     }
@@ -99,7 +100,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
             })
         }
         
-        let urlArray = ["https://img.clipartfest.com/6c6b4b848eedb01bf2600d66891cff73_funny-female-cartoon-character-names-kids-pinterest-sunshine-female-cartoon-characters-names_320-240.jpeg","http://www.thezerosbeforetheone.com/wordpress/wp-content/uploads/2011/07/smurfette-300x225.gif","https://s-media-cache-ak0.pinimg.com/236x/39/17/33/3917338162bb9eb2b63a23545e09f409.jpg","http://img3.wikia.nocookie.net/__cb20090216134906/fantendo/images/a/ab/Toon_Zelda.jpg","http://vignette1.wikia.nocookie.net/zelda/images/3/35/Toon_Zelda_%28Hyrule_Warriors%29.png/revision/latest?cb=20160902021811","http://main-im-char-1.gamewise.co/Hilda-Zelda-231446-full.png","https://s-media-cache-ak0.pinimg.com/736x/24/b6/1d/24b61d8d873bb34abe3cd6d8358313d5.jpg"]
+        /*let urlArray = ["https://img.clipartfest.com/6c6b4b848eedb01bf2600d66891cff73_funny-female-cartoon-character-names-kids-pinterest-sunshine-female-cartoon-characters-names_320-240.jpeg","http://www.thezerosbeforetheone.com/wordpress/wp-content/uploads/2011/07/smurfette-300x225.gif","https://s-media-cache-ak0.pinimg.com/236x/39/17/33/3917338162bb9eb2b63a23545e09f409.jpg","http://img3.wikia.nocookie.net/__cb20090216134906/fantendo/images/a/ab/Toon_Zelda.jpg","http://vignette1.wikia.nocookie.net/zelda/images/3/35/Toon_Zelda_%28Hyrule_Warriors%29.png/revision/latest?cb=20160902021811","http://main-im-char-1.gamewise.co/Hilda-Zelda-231446-full.png","https://s-media-cache-ak0.pinimg.com/736x/24/b6/1d/24b61d8d873bb34abe3cd6d8358313d5.jpg"]
         
         var counter = 0
         
@@ -112,16 +113,18 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
             do{
                 
             let data = try Data(contentsOf: url)
-            let imageFile = PFFile(name: "photo.png",data: data)
+            let imageFile = PFFile(name: "photo\(counter).png",data: data)
             let user = PFUser()
             user["photo"] = imageFile
             user.username = "Girl \(counter)"
             user.password = "password"
-            user["interesteInFemale"] = false
             user["isFemale"] = true
+            user["interesteInFemales"] = false
                 
                 let acl = PFACL()
+                
                 acl.getPublicWriteAccess = true
+                acl.getPublicReadAccess = true
                 
                 user.acl = acl
                 
@@ -138,8 +141,62 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
             catch{
                 print("could not get data")
             }
-        }
+        }*/
         // Do any additional setup after loading the view.
+        
+        let urlArray = ["http://cdn.madamenoire.com/wp-content/uploads/2013/08/penny-proud.jpg", "http://static.makers.com/styles/mobile_gallery/s3/betty-boop-cartoon-576km071213_0.jpg?itok=9qNg6GUd", "http://file1.answcdn.com/answ-cld/image/upload/f_jpg,w_672,c_fill,g_faces:center,q_70/v1/tk/view/cew/e8eccfc7/e367e6b52c18acd08104627205bbaa4ae16ee2fd.jpeg", "http://www.polyvore.com/cgi/img-thing?.out=jpg&size=l&tid=1760886", "http://vignette3.wikia.nocookie.net/simpsons/images/0/0b/Marge_Simpson.png/revision/20140826010629", "http://static6.comicvine.com/uploads/square_small/0/2617/103863-63963-torongo-leela.JPG", "https://itfinspiringwomen.files.wordpress.com/2014/03/scooby-doo-tv-09.jpg", "https://s-media-cache-ak0.pinimg.com/236x/9c/5e/86/9c5e86be6bf91c9dea7bac0ab473baa4.jpg"]
+        
+        var counter = 0
+        
+        for urlString in urlArray {
+            
+            counter += 1
+            
+            let url = URL(string: urlString)!
+            
+            do {
+                
+                let data = try Data(contentsOf: url)
+                
+                let imageFile = PFFile(name: "photo.png", data: data)
+                
+                let user = PFUser()
+                
+                user["photo"] = imageFile
+                
+                user.username = String(counter)
+                
+                user.password = "password"
+                
+                user["interestedFemales"] = false
+                
+                user["isFemale"] = true
+                
+                let acl = PFACL()
+                
+                acl.getPublicWriteAccess = true
+                acl.getPublicReadAccess = true
+                
+                user.acl = acl
+                
+                user.signUpInBackground(block: { (success, error) in
+                    
+                    if success {
+                        
+                        print("user signed up")
+                        
+                    }
+                    
+                })
+                
+            } catch {
+                
+                print("Could not get data")
+                
+            }
+            
+        }
+
     }
 
     override func didReceiveMemoryWarning() {
